@@ -5,12 +5,14 @@ public class TradeHistoryObject {
 	public int userID;
 	public int stockID;
 	public String tradeTime;
-	
-	public TradeHistoryObject(int tradeID, int userID, int stockID, String tradeTime){
+	public boolean isBought;
+
+	public TradeHistoryObject(int tradeID, int userID, int stockID, String tradeTime, boolean isBought){
 		this.tradeID=tradeID;
 		this.userID=userID;
 		this.stockID=stockID;
 		this.tradeTime=tradeTime;
+		this.isBought=isBought;
 	}
 	
 	public int getTradeID() {
@@ -37,7 +39,13 @@ public class TradeHistoryObject {
 	public void setTradeTime(String tradeTime) {
 		this.tradeTime = tradeTime;
 	}
-	
+	public boolean isBought() {
+		return isBought;
+	}
+
+	public void setBought(boolean isBought) {
+		this.isBought = isBought;
+	}
 	
 
 }
