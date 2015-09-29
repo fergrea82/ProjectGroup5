@@ -10,8 +10,15 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class Feed {
+	
 
-	public ArrayList<String[]> feedConnection(String stock) {
+	public static void main(String[] args) throws Exception{
+		 
+	//	feedConnection();
+		
+	}
+
+	public static ArrayList<String[]> feedConnection(String stock) {
 		/*
 		 * method which establishes connection with yahoo
 		 * takes String parameter of stock symbol - string supplied by user 
@@ -20,6 +27,7 @@ public class Feed {
 		 *  added to an array list and returned
 		 */
 		ArrayList<String[]> stocks = new ArrayList<>();
+		
 		
 		StringBuilder url = 
 	            new StringBuilder("http://finance.yahoo.com/d/quotes.csv?s=");
@@ -44,7 +52,6 @@ public class Feed {
         
         while ((inputLine = in.readLine()) != null)
         	{
-
         		fields = inputLine.split(","); 
         	}
         
