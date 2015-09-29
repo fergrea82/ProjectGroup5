@@ -30,8 +30,8 @@
 					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Profile<b class = "caret"></b></a>
 					<ul class = "dropdown-menu">
 					<!-- <a href = "/BuildingBlock/addTCaseToQueue1.html">Trading History</a> -->
-						<li><a href = "#">Trading History</a></li>
-						<li><a href = "#">Positions</a></li>
+						<li><a href = "/ProjectGroup5/TradingHistory.jsp">Trading History</a></li>
+						<li><a href = "/ProjectGroup5/Positions.jsp">Positions</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -88,11 +88,11 @@
 </div>
 
 <!--********************** Fixed Bottom NAVBAR **********************-->
-<div class = "container">
+<!--  <div class = "container">
 	<div class = "navbar navbar-default navbar-fixed-bottom">
 		<img src = "Resources/images/citi_200_year.gif" alt="Citi200Years" class=" navbar-brand img-rounded img-responsive pull-right">
 	</div>
-</div>
+</div>-->
 
 <script src= "http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src= "bootstrap/js/bootstrap.js"></script>
