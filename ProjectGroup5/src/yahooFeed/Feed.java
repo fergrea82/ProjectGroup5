@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Feed {
 
-	public ArrayList<String[]> feedConnection(String stock) {
+	public ArrayList<String[]> feedStock(String stock) {
 		/*
 		 * method which establishes connection with yahoo
 		 * takes String parameter of stock symbol - string supplied by user 
@@ -62,5 +62,45 @@ public class Feed {
 			e.printStackTrace();
 		}
 		return stocks;
+	}
+	
+	public void fullFeed() throws MalformedURLException {
+		
+		while(true){
+			String[] stocks = {"AAPL","IBM","CSCO"};
+			StringBuilder url = 
+		            new StringBuilder("http://finance.yahoo.com/d/quotes.csv?s=");
+	        for (String s : stocks)
+	            url.append(s + ",");
+	        url.deleteCharAt(url.length()-1);
+	        // Properties is for bid and ask
+	        url.append("&f=sab&e=.csv");
+	        
+	        String theUrl = url.toString();
+	        URL obj;
+			try {
+				obj = new URL(theUrl);
+			
+	        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	       
+	        con.setRequestMethod("GET");
+	        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+	        int responseCode = con.getResponseCode();
+	        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	        String inputLine;
+	        
+	        while ((inputLine = in.readLine()) != null)
+	        {
+	            int n = inputLine.indexOf("\"");
+	            String sub = inputLine.substring(n+1);
+	            int m = sub.indexOf("\"");
+	            String s = sub.substring(0, m);
+	            String[] fields = inputLine.split(",\"" + s + "\",", -1);
+	            
+	        }
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
