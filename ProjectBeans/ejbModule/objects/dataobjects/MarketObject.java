@@ -21,6 +21,9 @@ public class MarketObject {
 	@OneToMany(mappedBy="marketObj", fetch=FetchType.EAGER)
 	private List<StockObject> stocks;
 	
+	@OneToMany(mappedBy="marketObj", fetch=FetchType.EAGER)
+	private List<MarketCompanyObject> marketcompany;
+	
 	public MarketObject(int marketID, String marketName){
 		this.marketID=marketID;
 		this.marketName=marketName;

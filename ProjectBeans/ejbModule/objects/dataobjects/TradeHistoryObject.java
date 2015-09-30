@@ -1,16 +1,33 @@
 package objects.dataobjects;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity(name="tradehistory")
 public class TradeHistoryObject {
+	
+	@Id
 	public int tradeID;
-	public int userID;
-	public int stockID;
+	@ManyToOne(optional = false)
+	@JoinColumn(name="UserID", referencedColumnName="UserID")
+	UserObject userObj;
+	@ManyToOne(optional = false)
+	@JoinColumn(name="StockID", referencedColumnName="StockID")
+	StockObject stockObj;
 	public String tradeTime;
 	public boolean isBought;
 
-	public TradeHistoryObject(int tradeID, int userID, int stockID, String tradeTime, boolean isBought){
+	public TradeHistoryObject(int tradeID, int userID, StockObject stockObj, String tradeTime, boolean isBought){
 		this.tradeID=tradeID;
-		this.userID=userID;
-		this.stockID=stockID;
+		this.userObj=userObj;
+		this.stockObj=stockObj;
 		this.tradeTime=tradeTime;
 		this.isBought=isBought;
 	}
@@ -21,17 +38,17 @@ public class TradeHistoryObject {
 	public void setTradeID(int tradeID) {
 		this.tradeID = tradeID;
 	}
-	public int getUserID() {
-		return userID;
+	public UserObject getUserObject() {
+		return userObj;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUserObject(UserObject userObj) {
+		this.userObj = userObj;
 	}
-	public int getStockID() {
-		return stockID;
+	public StockObject getStockObj() {
+		return stockObj;
 	}
-	public void setStockID(int stockID) {
-		this.stockID = stockID;
+	public void setStockObject(StockObject stockObj) {
+		this.stockObj = stockObj;
 	}
 	public String getTradeTime() {
 		return tradeTime;
