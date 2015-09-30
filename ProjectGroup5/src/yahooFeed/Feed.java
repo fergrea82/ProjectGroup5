@@ -20,7 +20,7 @@ public class Feed {
 		
 	}
 
-	public static ArrayList<StockObject> feedConnection(String stock) {
+	public static StockObject feedConnection(String stock) {
 		/*
 		 * method which establishes connection with yahoo
 		 * takes String parameter of stock symbol - string supplied by user 
@@ -28,8 +28,9 @@ public class Feed {
 		 *  will create an array of string of each stock element these will be passed 
 		 *  added to an array list and returned
 		 */
-		ArrayList<StockObject> stocks = new ArrayList<>();
+		//ArrayList<StockObject> stocks = new ArrayList<>();
 		
+		StockObject stockObj = null;
 		
 		StringBuilder url = 
 	            new StringBuilder("http://finance.yahoo.com/d/quotes.csv?s=");
@@ -52,19 +53,20 @@ public class Feed {
         
         String[] fields = null;
         
-        StockObject stockObj = null;
+        
         
         while ((inputLine = in.readLine()) != null)
         	{
         		fields = inputLine.split(","); 
         		stockObj = new StockObject();
         	}
-        
+        for (int i =0; i<fields.length;i++) {
+        System.out.print(fields[i]+", ");
+        }
+        System.out.println();
         stockObj.setstockSymbol(fields[0]);
         stockObj.setAskPrice(Double.parseDouble(fields[1]));
         stockObj.setBidPrice(Double.parseDouble(fields[2]));
-        
-        stocks.add(stockObj);
         
 		}
         catch (MalformedURLException e) {
@@ -77,6 +79,6 @@ public class Feed {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return stocks;
+		return stockObj;
 	}
 }
