@@ -4,5 +4,9 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="ProjectBeans.jar" deploy-path="/" handle="module:/resource/ProjectBeans/ProjectBeans">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
