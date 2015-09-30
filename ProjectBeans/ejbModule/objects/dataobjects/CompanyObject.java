@@ -22,6 +22,9 @@ public class CompanyObject {
 	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER)
 	private List<StockObject> stocks;
 	
+	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER)
+	private List<MarketCompanyObject> marketcompany;
+	
 	public CompanyObject(int companyID, String companySymbol){
 		this.companyID=companyID;
 		this.companySymbol=companySymbol;

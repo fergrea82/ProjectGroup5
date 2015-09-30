@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import objects.dataobjects.CompanyObject;
 import objects.dataobjects.StockObject;
 
 //import object.dataobjects.*;
@@ -26,5 +27,11 @@ public class TradesBean implements TradesBeanLocal, TradesBeanRemote {
 	@Override
 	public void addStock(StockObject stock) {
 		entityManager.persist(stock);
+	}
+	
+	@Override
+	public CompanyObject getCompany(String symbol) {
+		CompanyObject comp = entityManager.find(CompanyObject.class, symbol);
+		return comp;
 	}
 }

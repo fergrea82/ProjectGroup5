@@ -1,32 +1,45 @@
 package objects.dataobjects;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name="stocks")
 public class StockObject {
 	
 	@Id
 	private int stockID;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name="CompanyID", referencedColumnName="CompanyID")
+	CompanyObject companyObj;
+	
+	private double bidPrice;
+	private double askPrice;
+	
 	@ManyToOne(optional = false)
 	@JoinColumn(name="MarketID", referencedColumnName="MarketID")
 	MarketObject marketObj;
-	private String stockSymbol;
-	private double bidPrice;
-	private double askPrice;
+	
 	private String StockTime;
+	
+	@OneToMany(mappedBy="stockObj", fetch=FetchType.EAGER)
+	private List<TradeHistoryObject> trades;
 	
 	public StockObject() {
 		//default constructor
 	}
 	
-	public StockObject(int stockID, MarketObject marketObj, String stockSymbol, double bidPrice, double askPrice, String stockTime){
+	public StockObject(int stockID, MarketObject marketObj, CompanyObject companyObj, double bidPrice, double askPrice, String stockTime){
 		this.stockID=stockID;
 		this.marketObj=marketObj;
-		this.stockSymbol=stockSymbol;
+		this.companyObj=companyObj;
 		this.bidPrice=bidPrice;
 		this.askPrice=askPrice;
 		this.StockTime=stockTime;
@@ -44,11 +57,11 @@ public class StockObject {
 	public void setMarketID(MarketObject marketObj) {
 		this.marketObj = marketObj;
 	}
-	public String getstockSymbol() {
-		return stockSymbol;
+	public CompanyObject getCompanyObject() {
+		return companyObj;
 	}
-	public void setstockSymbol(String stockName) {
-		this.stockSymbol = stockName;
+	public void setCompanyObject(CompanyObject companyObj) {
+		this.companyObj = companyObj;
 	}
 	public double getBidPrice() {
 		return bidPrice;
