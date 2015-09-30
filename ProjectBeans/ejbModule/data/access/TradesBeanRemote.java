@@ -1,7 +1,9 @@
 package data.access;
 
-import objects.dataobjects.StockObject;
+import javax.ejb.Remote;
 
+import objects.dataobjects.StockObject;
+@Remote
 public interface TradesBeanRemote {
 	void addStock(StockObject stock);
 }

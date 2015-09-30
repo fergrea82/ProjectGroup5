@@ -7,11 +7,11 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
+@Entity(name="market")
 public class MarketObject {
 	
 	public MarketObject() {
-		super();
+		//super();
 	}
 	
 	@Id

@@ -1,34 +1,35 @@
 package objects.dataobjects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name="stocks")
 public class StockObject {
 	
 	@Id
 	private int stockID;
 	@ManyToOne(optional = false)
-	@JoinColumn(name="marketID", referencedColumnName="MarketID")
+	@JoinColumn(name="MarketID", referencedColumnName="MarketID")
 	MarketObject marketObj;
 	private String stockSymbol;
 	private double bidPrice;
 	private double askPrice;
-	private String dateTime;
+	private String StockTime;
 	
 	public StockObject() {
 		//default constructor
 	}
 	
-	public StockObject(int stockID, MarketObject marketObj, String stockSymbol, double bidPrice, double askPrice, String dateTime){
+	public StockObject(int stockID, MarketObject marketObj, String stockSymbol, double bidPrice, double askPrice, String stockTime){
 		this.stockID=stockID;
 		this.marketObj=marketObj;
 		this.stockSymbol=stockSymbol;
 		this.bidPrice=bidPrice;
 		this.askPrice=askPrice;
-		this.dateTime=dateTime;
+		this.StockTime=stockTime;
 	}
 	
 	public int getStockID() {
@@ -61,12 +62,15 @@ public class StockObject {
 	public void setAskPrice(double askPrice) {
 		this.askPrice = askPrice;
 	}
-	public String getDateTime() {
-		return dateTime;
+
+	public String getStockTime() {
+		return StockTime;
 	}
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
+
+	public void setStockTime(String stockTime) {
+		StockTime = stockTime;
 	}
+	
 
 	
 	

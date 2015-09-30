@@ -45,7 +45,7 @@
 		<h2 class ="text-center"> Welcome to the Team 5 Trading Hub</h2>
 		<p>Please select a relevant Market from the Market dropdown and then a company to view live market data for that Company. </p>
 		<div class = "text-center">
-			<form class="form-inline" id="liveData" action="#" method="POST">
+			<form class="form-inline" id="liveData" action="CompanySymbolServlet" method="POST">
 	  			<div class="form-group">
 	    			<label for="market">Market: </label>
 	   			 	<select class="form-control" name="market">
@@ -57,7 +57,7 @@
 	    			<label for="company">Company: </label>
 	   			 	<select class="form-control" name="company">
 						<option value="" selected disabled>Please select</option>
-						<option>Company Name</option>
+						<option value ="AAPL">Company Name</option>
 					</select>
 	  			</div>
 	  			<button type="submit" class="btn btn-success">Submit</button>
