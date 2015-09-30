@@ -2,7 +2,9 @@ package project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
@@ -51,16 +53,25 @@ public class CompanySymbolServlet extends HttpServlet {
 		InitialContext context;
 		try {
 			context = new InitialContext();
-		
-		TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
-		
+			ArrayList<StockObject> stocks = new ArrayList<>();
+			TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
+			String company = request.getParameter("company");
+			
 			for(int i = 1;i <= 10;i++) {
 				StockObject stock = new StockObject();
-				stock = yahooFeed.Feed.feedConnection(request.getParameter("company"));
-				ArrayList<StockObject> stocks = null;
-						stocks.add(stock);
-				System.out.println(stocks.get(0).getstockSymbol());
-				//bean.addStock(stock);
+				System.out.println(i);
+				stock = yahooFeed.Feed.feedConnection(company);
+				
+				String timeStamp;
+	        	Timestamp ts = new Timestamp(Calendar.getInstance().getTimeInMillis());
+	        	timeStamp = ts.toString();
+				stock.setStockTime(timeStamp);
+				
+				System.out.println(stock.getstockSymbol());
+				
+				stocks.add(stock);
+				
+				bean.addStock(stock);
 			}
 			
 		} catch (NamingException e) {

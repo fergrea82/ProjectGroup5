@@ -1,5 +1,6 @@
 package objects.dataobjects;
-
+//@transient
+//@notEmpty
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 public class StockObject {
 	
 	@Id
+	
 	private int stockID;
 	@ManyToOne(optional = false)
 	@JoinColumn(name="MarketID", referencedColumnName="MarketID")
