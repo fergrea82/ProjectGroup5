@@ -1,17 +1,30 @@
-package object.dataobjects;
+package objects.dataobjects;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class StockObject {
 	
-	public int stockID;
-	public int marketID;
-	public String stockSymbol;
-	public double bidPrice;
-	public double askPrice;
-	public String dateTime;
+	@Id
+	private int stockID;
+	@ManyToOne(optional = false)
+	@JoinColumn(name="marketID", referencedColumnName="MarketID")
+	MarketObject marketObj;
+	private String stockSymbol;
+	private double bidPrice;
+	private double askPrice;
+	private String dateTime;
 	
-	public StockObject(int stockID, int marketID, String stockSymbol, double bidPrice, double askPrice, String dateTime){
+	public StockObject() {
+		//default constructor
+	}
+	
+	public StockObject(int stockID, MarketObject marketObj, String stockSymbol, double bidPrice, double askPrice, String dateTime){
 		this.stockID=stockID;
-		this.marketID=marketID;
+		this.marketObj=marketObj;
 		this.stockSymbol=stockSymbol;
 		this.bidPrice=bidPrice;
 		this.askPrice=askPrice;
@@ -24,11 +37,11 @@ public class StockObject {
 	public void setStockID(int stockID) {
 		this.stockID = stockID;
 	}
-	public int getMarketID() {
-		return marketID;
+	public MarketObject getMarket() {
+		return marketObj;
 	}
-	public void setMarketID(int marketID) {
-		this.marketID = marketID;
+	public void setMarketID(MarketObject marketObj) {
+		this.marketObj = marketObj;
 	}
 	public String getstockSymbol() {
 		return stockSymbol;

@@ -1,5 +1,7 @@
 package data.access;
 
-public interface TradesBeanRemote {
+import objects.dataobjects.StockObject;
 
+public interface TradesBeanRemote {
+	void addStock(StockObject stock);
 }
