@@ -1,31 +1,45 @@
+updated 30th Sep 2015 14.40
+
 USE citiprojectteam5db;
 
+DROP TABLE Stocks;
+DROP TABLE User;
+DROP TABLE Market;
+DROP TABLE TradeHistory;
+DROP TABLE Company;
+DROP TABLE MarketCompany;
 
+SELECT * FROM Stocks;
+SELECT * FROM User;
+SELECT * FROM Market;
+SELECT * FROM TradeHistory;
+SELECT * FROM Company;
+SELECT * FROM MarketCompany;
 
-
-
-CREATE TABLE User
-(	UserID int auto_increment PRIMARY KEY,
-	UserName nvarchar(30)
+CREATE TABLE Company
+(	CompanyID int auto_increment PRIMARY KEY,
+	CompanySymbol nvarchar(30)
 );
-
-
 
 CREATE TABLE Market
 (	MarketID int auto_increment PRIMARY KEY,
 	MarketName nvarchar(30)
 );
 
-
+CREATE TABLE User
+(	UserID int auto_increment PRIMARY KEY,
+	UserName nvarchar(30)
+);
 
 CREATE TABLE Stocks
 (	StockID int auto_increment PRIMARY KEY,
-    StockSymbol nvarchar(30),
+    CompanyID int,
     BidPrice double(6,4),
     AskPrice double(6,4),
 	StockTime timestamp,
     MarketID int,
-    FOREIGN KEY (MarketID) REFERENCES Market(MarketID)
+    FOREIGN KEY (MarketID) REFERENCES Market(MarketID),
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
 );
 
 CREATE TABLE TradeHistory
@@ -33,15 +47,16 @@ CREATE TABLE TradeHistory
 	UserID int,
     StockID int,
     TradeTime timestamp,
+    Buy tinyint,
     FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (StockID) REFERENCES Stocks(StockID),
-    Buy tinyint
+    FOREIGN KEY (StockID) REFERENCES Stocks(StockID)
 );
 
-SELECT * FROM stocks;
+CREATE TABLE MarketCompany
+(	IndexID int auto_increment PRIMARY KEY,
+	MarketID int,
+    CompanyID int,
+	FOREIGN KEY (MarketID) REFERENCES Market(MarketID),
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
+);
 
-SELECT * FROM User;
-
-SELECT * FROM Market;
-
-SELECT * FROM TradeHistory;
