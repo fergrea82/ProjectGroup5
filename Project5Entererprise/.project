@@ -3,7 +3,6 @@
 	<name>Project5Entererprise</name>
 	<comment></comment>
 	<projects>
-		<project>ProjectJPA</project>
 		<project>ProjectGroup5</project>
 	</projects>
 	<buildSpec>

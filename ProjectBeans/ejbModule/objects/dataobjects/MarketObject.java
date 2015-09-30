@@ -1,8 +1,25 @@
-package object.dataobjects;
+package objects.dataobjects;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity(name="market")
 public class MarketObject {
-	public int marketID;
-	public String marketName;
+	
+	public MarketObject() {
+		//super();
+	}
+	
+	@Id
+	private int marketID;
+	private String marketName;
+	
+	@OneToMany(mappedBy="marketObj", fetch=FetchType.EAGER)
+	private List<StockObject> stocks;
 	
 	public MarketObject(int marketID, String marketName){
 		this.marketID=marketID;
@@ -21,7 +38,5 @@ public class MarketObject {
 	public void setMarketName(String marketName) {
 		this.marketName = marketName;
 	}
-	
-	
-	
+
 }

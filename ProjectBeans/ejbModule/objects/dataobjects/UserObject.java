@@ -1,4 +1,4 @@
-package object.dataobjects;
+package objects.dataobjects;
 
 public class UserObject {
 	public int userID;

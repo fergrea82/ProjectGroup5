@@ -9,6 +9,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import objects.dataobjects.StockObject;
+
 public class Feed {
 	
 
@@ -18,7 +20,7 @@ public class Feed {
 		
 	}
 
-	public static ArrayList<String[]> feedConnection(String stock) {
+	public static ArrayList<StockObject> feedConnection(String stock) {
 		/*
 		 * method which establishes connection with yahoo
 		 * takes String parameter of stock symbol - string supplied by user 
@@ -26,7 +28,7 @@ public class Feed {
 		 *  will create an array of string of each stock element these will be passed 
 		 *  added to an array list and returned
 		 */
-		ArrayList<String[]> stocks = new ArrayList<>();
+		ArrayList<StockObject> stocks = new ArrayList<>();
 		
 		
 		StringBuilder url = 
@@ -50,12 +52,19 @@ public class Feed {
         
         String[] fields = null;
         
+        StockObject stockObj = null;
+        
         while ((inputLine = in.readLine()) != null)
         	{
         		fields = inputLine.split(","); 
+        		stockObj = new StockObject();
         	}
         
-        stocks.add(fields);
+        stockObj.setstockSymbol(fields[0]);
+        stockObj.setAskPrice(Double.parseDouble(fields[1]));
+        stockObj.setBidPrice(Double.parseDouble(fields[2]));
+        
+        stocks.add(stockObj);
         
 		}
         catch (MalformedURLException e) {
