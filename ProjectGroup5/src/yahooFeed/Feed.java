@@ -7,10 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import org.jboss.logging.*;
 import objects.dataobjects.StockObject;
+
+import org.jboss.logging.Logger;
 
 public class Feed {
 	
@@ -64,6 +66,10 @@ public class Feed {
         //stockObj.setstockSymbol(fields[0]);
         stockObj.setAskPrice(Double.parseDouble(fields[1]));
         stockObj.setBidPrice(Double.parseDouble(fields[2]));
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        stockObj.setStockTime(strDate);
         
 		}
         catch (MalformedURLException e) {

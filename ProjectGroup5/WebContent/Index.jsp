@@ -106,7 +106,7 @@ javax.naming.InitialContext, java.util.List, yahooFeed.Feed"%>
 
     function refreshTable(){
         $('#tableHolder').load('LiveTableData.jsp', function(){
-           setTimeout(refreshTable, 1000);
+           setTimeout(refreshTable, 1);
         });
     }
 </script>
