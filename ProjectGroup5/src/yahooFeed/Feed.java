@@ -14,7 +14,8 @@ import objects.dataobjects.StockObject;
 public class Feed {
 	
 	public static void main(String[]args) {
-		initialConnection("LSE");
+		StockObject s = feedConnection("Fergus");
+		System.out.println(s.getstockSymbol());
 	}
 	
 	public static void initialConnection(String market) {
