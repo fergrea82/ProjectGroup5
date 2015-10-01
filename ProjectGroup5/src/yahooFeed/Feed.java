@@ -9,10 +9,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.jboss.logging.*;
 import objects.dataobjects.StockObject;
 
 public class Feed {
-
+	
+	static Logger log = Logger.getLogger(Feed.class);
+	
 	public static StockObject feedConnection(String stock) {
 		/*
 		 * method which establishes connection with yahoo
@@ -29,6 +32,7 @@ public class Feed {
 	            new StringBuilder("http://finance.yahoo.com/d/quotes.csv?s=");
             url.append(stock + "+");
         url.append("&f=sab&e=.csv");
+        log.info("Company Added to the Yahoo Feed = " + stock);
         
         try {
         String theUrl = url.toString();
@@ -64,12 +68,15 @@ public class Feed {
 		}
         catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
+        	log.error("MalformedURLException:" + e.getMessage());
 			e.printStackTrace();
 		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
+			log.error("ProtocolException:" + e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			log.error("IOException:" + e.getMessage());
 			e.printStackTrace();
 		}
 		return stockObj;
