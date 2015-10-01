@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.validator.internal.util.logging.Log;
+import org.jboss.logging.Logger;
 
 import objects.dataobjects.StockObject;
+import yahooFeed.Feed;
 import data.access.TradesBeanLocal;
 
 /**
@@ -25,7 +27,7 @@ import data.access.TradesBeanLocal;
 @EJB(name="ejb/TradesBean",beanInterface=TradesBeanLocal.class)
 public class CompanySymbolServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	static Logger log = Logger.getLogger(CompanySymbolServlet.class);
     private static ArrayList<StockObject> stocks = new ArrayList<>();
     
     public ArrayList<StockObject> getStocks() {
@@ -82,6 +84,7 @@ public class CompanySymbolServlet extends HttpServlet {
 			stocks.add(stock);
 			
 		} catch (NamingException e) {
+			log.error("NamingException: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return stock;
