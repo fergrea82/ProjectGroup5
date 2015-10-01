@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="objects.dataobjects.StockObject , 
+javax.naming.InitialContext, java.util.List, yahooFeed.Feed"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -75,9 +76,8 @@
 <div class = "row">
 	<div class="col-md-6 panel panel-success">
   		<div class="panel-heading">Live Market Data</div>
-		  <div class="panel-body">
-		    <p>//:TODO!!</p>
-			<p class = "text-center"><br/><a class="btn btn-success" href="#" role="button">To Do</a>
+		  <div class="panel-body" id="tableHolder">
+			
 		</div>
 	</div>
 
@@ -97,8 +97,19 @@
 		<img src = "Resources/images/citi_200_year.gif" alt="Citi200Years" class=" navbar-brand img-rounded img-responsive pull-right">
 	</div>
 </div>-->
-
 <script src= "http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src= "bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      refreshTable();
+    });
+
+    function refreshTable(){
+        $('#tableHolder').load('LiveTableData.jsp', function(){
+           setTimeout(refreshTable, 1);
+        });
+    }
+</script>
+
 </body>
 </html>
