@@ -57,10 +57,14 @@
 	    			<label for="company">Company: </label>
 	   			 	<select class="form-control" name="company">
 						<option value="" selected disabled>Please select</option>
-						<option value ="AAPL">Company Name</option>
+						<option value ="AAPL">Apple(AAPL)</option>
+						<option value ="MSFT">Microsoft(MSFT)</option>
+						<option value ="CSCO">Cisco(CSCO)</option>
+						<option value ="IBM">IBM(IBM)</option>
+						<option value ="LSE.L">London Stock Exchange</option>
 					</select>
 	  			</div>
-	  			<button type="submit" class="btn btn-success">Submit</button>
+	  			<button  type="submit" class="btn btn-success">Submit</button>
 			</form>
 		</div>
 	</div>	

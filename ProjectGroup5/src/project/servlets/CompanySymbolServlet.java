@@ -25,8 +25,14 @@ import data.access.TradesBeanLocal;
 @EJB(name="ejb/TradesBean",beanInterface=TradesBeanLocal.class)
 public class CompanySymbolServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
+	
+    private static ArrayList<StockObject> stocks = new ArrayList<>();
+    
+    public ArrayList<StockObject> getStocks() {
+		return stocks;
+	}
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public CompanySymbolServlet() {
@@ -43,31 +49,43 @@ public class CompanySymbolServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * servlet acts as go between for front end and yahoo feed and back end database
+	 * could be deprecated to integrate with jquery
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
+		String company = request.getParameter("company");
 		
+		StockObject stock = continuousFeed(company);
+		
+		//return to main Index.jsp
+		request.setAttribute("Stock", stock);
+		request.setAttribute("Stocks", stocks);
+		request.getRequestDispatcher("/Index.jsp").include(request, response);
+	}
+	
+	private StockObject continuousFeed(String companySymbol) {
+		/*
+		 * Generic servlet which is called by jquery periodically 
+		 * returns a stock object which is then passed back doPost
+		 */
+		StockObject stock = new StockObject();
 		InitialContext context;
 		try {
 			context = new InitialContext();
 		
-		TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
+			TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
 		
-		ArrayList<StockObject> stocks = new ArrayList<>();
-			for(int i = 1;i <= 10;i++) {
-				StockObject stock = new StockObject();
-				stock = yahooFeed.Feed.feedConnection(request.getParameter("company"));
-						stocks.add(stock);
-				System.out.println(stocks.get(0).toString());
-				bean.addStock(stock);
-			}
+			stock = yahooFeed.Feed.feedConnection(companySymbol);
+			bean.addStock(stock);
+			stocks.add(stock);
 			
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return stock;
 	}
+}			
 
-}
+	

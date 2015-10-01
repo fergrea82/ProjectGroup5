@@ -7,26 +7,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import data.access.TradesBeanLocal;
-import objects.dataobjects.CompanyObject;
 import objects.dataobjects.StockObject;
 
 public class Feed {
-	
 
-	public static void main(String[] args) throws Exception{
-		 
-	//	feedConnection();
-		
-	}
-
-	public static StockObject feedConnection(String stock) throws NamingException {
+	public static StockObject feedConnection(String stock) {
 		/*
 		 * method which establishes connection with yahoo
 		 * takes String parameter of stock symbol - string supplied by user 
@@ -36,11 +23,8 @@ public class Feed {
 		 */
 		//ArrayList<StockObject> stocks = new ArrayList<>();
 		
-		DecimalFormat df = new DecimalFormat("0000.##");
-		
 		StockObject stockObj = null;
-		InitialContext context = new InitialContext();
-		TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
+		
 		StringBuilder url = 
 	            new StringBuilder("http://finance.yahoo.com/d/quotes.csv?s=");
             url.append(stock + "+");
@@ -67,21 +51,16 @@ public class Feed {
         while ((inputLine = in.readLine()) != null)
         	{
         		fields = inputLine.split(","); 
-        		
         	}
         for (int i =0; i<fields.length;i++) {
-        System.out.print(fields[i]+", ");
+        	System.out.print(fields[i]+",");
         }
-        System.out.println();
         
-        //stockObj.setCompanyObject(bean.getCompany(fields[0]));
-        if (!fields[1].equalsIgnoreCase("N/A")){
-        	System.out.println(fields[1]);
-        	stockObj.setAskPrice(Double.parseDouble(fields[1]));
-        }
-        if (!fields[2].equalsIgnoreCase("N/A")){
-        	stockObj.setBidPrice(Double.parseDouble(fields[2]));
-        }
+        System.out.println();
+        //stockObj.setstockSymbol(fields[0]);
+        stockObj.setAskPrice(Double.parseDouble(fields[1]));
+        stockObj.setBidPrice(Double.parseDouble(fields[2]));
+        
 		}
         catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
