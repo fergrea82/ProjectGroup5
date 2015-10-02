@@ -8,4 +8,6 @@ import objects.dataobjects.StockObject;
 public interface TradesBeanRemote {
 	void addStock(StockObject stock);
 	CompanyObject getCompany(String symbol);
+	void addCompany(CompanyObject company);
+	Boolean companyCheck(CompanyObject comp);
 }
