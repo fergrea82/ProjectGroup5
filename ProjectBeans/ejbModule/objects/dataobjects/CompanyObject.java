@@ -2,6 +2,7 @@ package objects.dataobjects;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,10 +21,10 @@ public class CompanyObject {
 	
 	private String companySymbol;
 	
-	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<StockObject> stocks;
 	
-	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<MarketCompanyObject> marketcompany;
 	
 	public CompanyObject(int companyID, String companySymbol){

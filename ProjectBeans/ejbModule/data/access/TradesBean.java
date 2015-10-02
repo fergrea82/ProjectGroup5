@@ -6,6 +6,7 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -42,9 +43,12 @@ public class TradesBean implements TradesBeanLocal, TradesBeanRemote {
 		Query query = entityManager.createQuery(
 			    "SELECT c FROM "+CompanyObject.class.getName()+" c WHERE c.companySymbol = :compName");
 			query.setParameter("compName", symbol);
-		comp = (CompanyObject) query.getSingleResult();
-		
-		
+		try {
+			comp = (CompanyObject) query.getSingleResult();
+		} catch(NoResultException ex) {
+			comp =null;
+		}
+
 		//CompanyObject comp = entityManager.find(CompanyObject.class, symbol);
 		return comp;
 	}
