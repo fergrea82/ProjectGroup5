@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.net.UnknownHostException;
 
 import objects.dataobjects.StockObject;
