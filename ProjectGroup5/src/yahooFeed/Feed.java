@@ -6,8 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.net.UnknownHostException;
 
 import objects.dataobjects.StockObject;
 
@@ -68,6 +69,14 @@ public class Feed {
         stockObj.setAskPrice(Double.parseDouble(fields[1]));
         stockObj.setBidPrice(Double.parseDouble(fields[2]));
         
+		}
+        catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        catch (SocketTimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
         catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
