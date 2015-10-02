@@ -54,12 +54,15 @@ public class CompanySymbolServlet extends HttpServlet {
 		
 		TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
 		
-		for(int i = 1;i <= 10;i++) {
-			StockObject stock = new StockObject();
-			ArrayList<StockObject> stocks = yahooFeed.Feed.feedConnection(request.getParameter("company"));
-			System.out.println(stocks.get(0).getstockSymbol());
-			bean.addStock(stock);
-		}
+			for(int i = 1;i <= 10;i++) {
+				StockObject stock = new StockObject();
+				stock = yahooFeed.Feed.feedConnection(request.getParameter("company"));
+				ArrayList<StockObject> stocks = null;
+						stocks.add(stock);
+				System.out.println(stocks.get(0).getstockSymbol());
+				//bean.addStock(stock);
+			}
+			
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
