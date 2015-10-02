@@ -89,7 +89,7 @@ public class CompanySymbolServlet extends HttpServlet {
 			stock = yahooFeed.Feed.feedConnection(companySymbol);
 			
 			CompanyObject company = new CompanyObject();
-			
+
 	        //System.out.println();
 	        stock.setStockTime(timeStamp);
 	        
@@ -97,6 +97,7 @@ public class CompanySymbolServlet extends HttpServlet {
 	        	company = bean.getCompany(companySymbol);
 	        }
 	        else {
+	        	company.setCompanySymbol(companySymbol);
 	        	bean.addCompany(company);
 	        }
 			stock.setCompanyObject(company);
