@@ -30,8 +30,27 @@ public class TradesBean implements TradesBeanLocal, TradesBeanRemote {
 	}
 	
 	@Override
+	public Boolean companyCheck(CompanyObject comp) {
+		System.out.println(entityManager.contains(comp));
+		return entityManager.contains(comp);
+	}
+	
+	@Override
 	public CompanyObject getCompany(String symbol) {
-		CompanyObject comp = entityManager.find(CompanyObject.class, symbol);
+		
+		CompanyObject comp = null;
+		Query query = entityManager.createQuery(
+			    "SELECT c FROM "+CompanyObject.class.getName()+" c WHERE c.companySymbol = :compName");
+			query.setParameter("compName", symbol);
+		comp = (CompanyObject) query.getSingleResult();
+		
+		
+		//CompanyObject comp = entityManager.find(CompanyObject.class, symbol);
 		return comp;
+	}
+	
+	@Override
+	public void addCompany(CompanyObject company) {
+		entityManager.persist(company);
 	}
 }

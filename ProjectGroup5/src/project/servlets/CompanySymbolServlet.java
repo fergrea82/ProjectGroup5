@@ -2,7 +2,9 @@ package project.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.validator.internal.util.logging.Log;
 import org.jboss.logging.Logger;
 
+import objects.dataobjects.CompanyObject;
 import objects.dataobjects.StockObject;
 import yahooFeed.Feed;
 import data.access.TradesBeanLocal;
@@ -78,8 +81,26 @@ public class CompanySymbolServlet extends HttpServlet {
 			context = new InitialContext();
 		
 			TradesBeanLocal bean = (TradesBeanLocal)context.lookup("java:comp/env/ejb/TradesBean");
-		
+			
+			String timeStamp;
+        	Timestamp ts = new Timestamp(Calendar.getInstance().getTimeInMillis());
+        	
+        	timeStamp = ts.toString();
 			stock = yahooFeed.Feed.feedConnection(companySymbol);
+			
+			CompanyObject company = new CompanyObject();
+			
+	        //System.out.println();
+	        stock.setStockTime(timeStamp);
+	        
+	        if(bean.getCompany(companySymbol)!=null) {
+	        	company = bean.getCompany(companySymbol);
+	        }
+	        else {
+	        	bean.addCompany(company);
+	        }
+			stock.setCompanyObject(company);
+			
 			bean.addStock(stock);
 			stocks.add(stock);
 			

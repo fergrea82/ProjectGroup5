@@ -17,6 +17,7 @@ public class CompanyObject {
 	
 	@Id
 	private int companyID;
+	
 	private String companySymbol;
 	
 	@OneToMany(mappedBy="companyObj", fetch=FetchType.EAGER)

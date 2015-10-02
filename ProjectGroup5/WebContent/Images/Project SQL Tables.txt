@@ -1,4 +1,4 @@
-updated 30th Sep 2015 14.40
+updated 02nd october 2015 14.40
 
 USE citiprojectteam5db;
 
@@ -21,6 +21,10 @@ CREATE TABLE Company
 	CompanySymbol nvarchar(30)
 );
 
+DELETE FROM Company WHERE CompanyId=6;
+
+ALTER TABLE Company ADD UNIQUE (CompanySymbol);
+
 CREATE TABLE Market
 (	MarketID int auto_increment PRIMARY KEY,
 	MarketName nvarchar(30)
@@ -34,8 +38,8 @@ CREATE TABLE User
 CREATE TABLE Stocks
 (	StockID int auto_increment PRIMARY KEY,
     CompanyID int,
-    BidPrice double(6,4),
-    AskPrice double(6,4),
+    BidPrice double(10,4),
+    AskPrice double(10,4),
 	StockTime timestamp,
     MarketID int,
     FOREIGN KEY (MarketID) REFERENCES Market(MarketID),
@@ -60,3 +64,4 @@ CREATE TABLE MarketCompany
     FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
 );
 
+URL = http://finance.yahoo.com/d/quotes.csv?s=AAPL+&f=sab&e=.csv

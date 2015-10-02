@@ -12,4 +12,8 @@ public interface TradesBeanLocal {
 
 	CompanyObject getCompany(String symbol);
 
+	void addCompany(CompanyObject company);
+
+	Boolean companyCheck(CompanyObject comp);
+
 }
