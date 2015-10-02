@@ -93,7 +93,7 @@ public class CompanySymbolServlet extends HttpServlet {
 	        //System.out.println();
 	        stock.setStockTime(timeStamp);
 	        
-	        if(bean.getCompany(companySymbol)!=null) {
+	        /*if(bean.getCompany(companySymbol)!=null) {
 	        	company = bean.getCompany(companySymbol);
 	        }
 	        else {
@@ -101,7 +101,7 @@ public class CompanySymbolServlet extends HttpServlet {
 	        	bean.addCompany(company);
 	        }
 			stock.setCompanyObject(company);
-			
+			*/
 			bean.addStock(stock);
 			stocks.add(stock);
 			
