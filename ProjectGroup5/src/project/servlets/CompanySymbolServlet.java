@@ -1,7 +1,7 @@
 package project.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.validator.internal.util.logging.Log;
 import org.jboss.logging.Logger;
 
 import objects.dataobjects.CompanyObject;
 import objects.dataobjects.StockObject;
-import yahooFeed.Feed;
 import data.access.TradesBeanLocal;
 
 /**
@@ -61,9 +59,11 @@ public class CompanySymbolServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		//PrintWriter out = response.getWriter();
 		String company = request.getParameter("company");
+		StockObject stock = new StockObject();
 		
-		StockObject stock = continuousFeed(company);
-		
+		if (company!=null) {
+			stock = continuousFeed(company);
+		}
 		//return to main Index.jsp
 		request.setAttribute("Stock", stock);
 		request.setAttribute("Stocks", stocks);

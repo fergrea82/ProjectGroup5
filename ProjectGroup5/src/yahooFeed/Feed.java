@@ -7,7 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import objects.dataobjects.StockObject;
@@ -64,11 +66,13 @@ public class Feed {
         
         System.out.println();
         //stockObj.setstockSymbol(fields[0]);
+        
         stockObj.setAskPrice(Double.parseDouble(fields[1]));
         stockObj.setBidPrice(Double.parseDouble(fields[2]));
+        //Timestamp ts = new Timestamp(Calendar.getInstance().getTimeInMillis());
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         Date now = new Date();
-        String strDate = sdfDate.format(now);
+        String strDate = now.toString();
         stockObj.setStockTime(strDate);
         
 		}
