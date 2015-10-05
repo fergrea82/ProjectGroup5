@@ -55,6 +55,7 @@ public class TradesBean implements TradesBeanLocal, TradesBeanRemote {
 	
 	@Override
 	public void addCompany(CompanyObject company) {
-		entityManager.persist(company);
+		entityManager.merge(company);
+		entityManager.flush();
 	}
 }
