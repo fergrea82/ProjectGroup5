@@ -84,6 +84,13 @@ javax.naming.InitialContext, java.util.List, yahooFeed.Feed"%>
 	<div class="col-md-6 panel panel-success">
 		<div class="panel-heading">Strategy</div>
 		  <div class="panel-body">
+		  <div class="form-group">
+	    			<label for="strategy">Please Choose a Strategy: </label>
+	   			 	<select class="form-control" name="strategy">
+						<option value="" selected disabled>Please select</option>
+						<option value ="TwoMovingAvg">Two Moving Averages</option>
+					</select>
+	  			</div>
 		    <p>//:TODO!!</p>
 			<p class = "text-center"><a class="btn btn-success" href="#" role="button">To Do</a>
 		  </div>
